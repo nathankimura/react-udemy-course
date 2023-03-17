@@ -12,7 +12,7 @@ export const Home = () => {
   const [posts, setPosts] = useState([]); //array destructuring
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(9);
   const [searchValue, setSearchValue] = useState('');
 
 
