@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { PostCard } from '.';
 import { postCardPropsMock } from './mock';
 
-const props = postCardPropsMock
+const props = postCardPropsMock;
 
 describe('<PostCard />', () => {
   // it('should render PostCard correctly', () => {
@@ -13,10 +13,9 @@ describe('<PostCard />', () => {
   // The above is an example of debug using //
 
   it('should render PostCard correctly', () => {
-    render(<PostCard {...props} />)
+    render(<PostCard {...props} />);
 
-    expect(screen.getByRole('img', { name: /TITLE1/i }))
-      .toHaveAttribute('src', 'img/img.png');
+    expect(screen.getByRole('img', { name: /TITLE1/i })).toHaveAttribute('src', 'img/img.png');
 
     expect(screen.getByRole('heading', { name: /title1/i })).toBeInTheDocument();
 
@@ -26,4 +25,4 @@ describe('<PostCard />', () => {
     const { container } = render(<PostCard {...props} />);
     expect(container.firstChild).toMatchSnapshot();
   });
-}); 
+});

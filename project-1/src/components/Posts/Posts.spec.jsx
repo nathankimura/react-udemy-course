@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { Posts } from './'
+import { render, screen } from '@testing-library/react';
+import { Posts } from './';
 
 const props = {
   posts: [
@@ -21,37 +21,31 @@ const props = {
       body: 'body 3',
       cover: 'img/img3.png',
     },
-  ]
-}
+  ],
+};
 
 describe('<Posts />', () => {
   it('should render posts', () => {
-    render(<Posts {...props} />)
+    render(<Posts {...props} />);
 
-    expect(screen.getAllByRole('heading', { name: /title/i }))
-      .toHaveLength(3);
+    expect(screen.getAllByRole('heading', { name: /title/i })).toHaveLength(3);
 
-    expect(screen.getAllByRole('img', { src: /img/i }))
-      .toHaveLength(3);
+    expect(screen.getAllByRole('img', { src: /img/i })).toHaveLength(3);
 
-    expect(screen.getAllByText(/body/i))
-      .toHaveLength(3);
+    expect(screen.getAllByText(/body/i)).toHaveLength(3);
 
-    expect(screen.getByRole('img', { name: /title 3/i }))
-      .toHaveAttribute('src', 'img/img3.png');
+    expect(screen.getByRole('img', { name: /title 3/i })).toHaveAttribute('src', 'img/img3.png');
   });
 
   it('should not render posts', () => {
-    render(<Posts />)
+    render(<Posts />);
 
-    expect(screen.queryAllByRole('heading', { name: /title/i }))
-      .toHaveLength(0);
+    expect(screen.queryAllByRole('heading', { name: /title/i })).toHaveLength(0);
   });
 
   it('should match snapshot', () => {
-    const { container } = render(<Posts {...props} />)
+    const { container } = render(<Posts {...props} />);
 
-    expect(container.firstChild)
-      .toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
-})
+});
