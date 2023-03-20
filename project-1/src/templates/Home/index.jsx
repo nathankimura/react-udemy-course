@@ -42,9 +42,7 @@ export const Home = () => {
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
   const filteredPosts = searchValue
-    ? allPosts.filter((post) => {
-        return post.title.toLowerCase().includes(searchValue.toLocaleLowerCase());
-      })
+    ? allPosts.filter((post) => post.title.toLowerCase().includes(searchValue.toLocaleLowerCase()))
     : posts;
 
   return (
