@@ -8,9 +8,20 @@ function App() {
     setCounter((prev) => prev + 1);
   };
 
+  // componentDidUpdate - executa toda vez que o component atualiza
   useEffect(() => {
     console.log('É o atualizas');
   });
+
+  // componentDidMount - executa uma vez, assim que a página carrega
+  useEffect(() => {
+    console.log('É o montas');
+  }, []);
+
+  // com dependência - executa toda vez que a dependência mudar
+  useEffect(() => {
+    console.log('Contador mudou para:', counter);
+  }, [counter]);
 
   const handleClickMinus = () => {
     setCounter((prev) => prev - 1);
