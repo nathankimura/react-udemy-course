@@ -3,6 +3,7 @@ import { setupServer } from 'msw/node';
 
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { Home } from '.';
+import userEvent from '@testing-library/user-event';
 
 const handlers = [
   rest.get('*jsonplaceholder.typicode.com*', async (req, res, ctx) => {
@@ -64,6 +65,42 @@ describe('<Home />', () => {
     const button = screen.getByRole('button', { name: /load more posts/i });
     expect(button).toBeInTheDocument();
 
-    screen.debug();
+    // screen.debug();
+  });
+
+  it('should search for posts', async () => {
+    render(<Home />);
+    const noMorePosts = screen.getByText('Não existem posts');
+
+    expect.assertions(13);
+
+    await waitForElementToBeRemoved(noMorePosts, { timeout: 1000 });
+
+    const search = screen.getByPlaceholderText(/type your search/i);
+
+    expect(screen.getByRole('heading', { name: 'title1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title2' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title3' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title4' })).not.toBeInTheDocument();
+
+    userEvent.type(search, 'title1');
+
+    expect(screen.getByRole('heading', { name: 'title1' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title2' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title3' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title4' })).not.toBeInTheDocument();
+
+    expect(screen.getByRole('heading', { name: 'Search value: title1' })).toBeInTheDocument();
+
+    userEvent.clear(search);
+
+    expect(screen.getByRole('heading', { name: 'title1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title2' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title3' })).toBeInTheDocument();
+
+    userEvent.type(search, 'batatinha');
+
+    expect(screen.getByText('Não existem posts')).toBeInTheDocument();
+    // screen.debug();
   });
 });
