@@ -34,6 +34,9 @@ const useFetch = (url, options) => {
   useEffect(() => {
     let wait = false;
 
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     console.log('EFFECT', new Date().toLocaleString());
     console.log(rfOpt.current.headers);
 
@@ -42,7 +45,10 @@ const useFetch = (url, options) => {
     const fetchData = async () => {
       await new Promise((r) => setTimeout(r, 2000));
       try {
-        const rawData = await fetch(rfUrl.current, rfOpt.current);
+        const rawData = await fetch(rfUrl.current, {
+          signal,
+          ...rfOpt.current,
+        });
         const data = await rawData.json();
         if (!wait) {
           setResult(data);
@@ -52,13 +58,14 @@ const useFetch = (url, options) => {
         if (!wait) {
           setLoading(false);
         }
-        throw error;
+        console.log('MY ERROR: ', error);
       }
     };
     fetchData();
 
     return () => {
       wait = true;
+      controller.abort();
     };
   }, [shouldLoad]);
 
@@ -66,6 +73,7 @@ const useFetch = (url, options) => {
 };
 
 function App() {
+  //12332123
   const [postId, setPostId] = useState('');
   const [result, loading] = useFetch(
     'https://jsonplaceholder.typicode.com/posts/' + postId,
@@ -90,7 +98,6 @@ function App() {
   };
 
   if (!loading && result) {
-    // 1
     return (
       <div>
         {result?.length > 0 ? (
