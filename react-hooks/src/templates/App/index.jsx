@@ -5,7 +5,7 @@ import { PostsProvider } from '../../contexts/PostsProvider';
 import { Posts } from '../../components/Posts';
 import { CounterProvider } from '../../contexts/CounterProvider';
 
-function App() {
+function App1() {
   return (
     <CounterProvider>
       <PostsProvider>
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default App1;
