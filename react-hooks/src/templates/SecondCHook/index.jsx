@@ -5,7 +5,7 @@ import './styles.css';
 const POSTS_URL =
   'https://jsonplaceholder.typicode.com/posts/';
 
-function App() {
+function App2() {
   const [postId, setPostId] = useState('');
   const [result, loading] = useFetch(
     POSTS_URL + postId,
@@ -53,4 +53,4 @@ function App() {
   return <h1>Oi</h1>;
 }
 
-export default App;
+export default App2;
