@@ -1,9 +1,9 @@
+import { Button } from '../../components/Button';
+import { Heading } from '../../components/Heading';
 import { useCounterContext } from '../../contexts/CounterContext';
-import { Button } from '../components/Button';
-import { Heading } from '../components/Heading';
 import './styles.css';
 
-function App() {
+export function Home() {
   const [state, actions] = useCounterContext();
 
   const handleError = () => {
@@ -35,5 +35,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

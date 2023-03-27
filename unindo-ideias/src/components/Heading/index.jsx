@@ -1,4 +1,4 @@
-import { useCounterContext } from '../../../contexts/CounterContext';
+import { useCounterContext } from '../../contexts/CounterContext';
 
 export const Heading = () => {
   const [state] = useCounterContext();
