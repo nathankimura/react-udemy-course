@@ -14,7 +14,9 @@ export function Redirect() {
     }, 1000);
 
     if (counter <= 0) {
-      navigate('/about');
+      navigate('/about', {
+        state: `This is the state: ${Math.random()}`,
+      });
     }
   });
   return (
