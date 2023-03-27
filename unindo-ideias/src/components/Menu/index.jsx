@@ -9,6 +9,7 @@ export const Menu = () => {
       <Link to="/posts">Posts</Link>
       <Link to="/posts/10">Post 10</Link>
       <Link to="/posts/10?batata=batatinha">Post batata</Link>
+      <Link to="/redirect">Redirect</Link>
     </div>
   );
 };
